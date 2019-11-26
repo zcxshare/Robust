@@ -2,14 +2,17 @@
 
 buildscript {
     repositories {
+        maven { url 'https://maven.google.com' }
         mavenLocal()
         jcenter()
+        maven {url uri('E:\\AndroidProject\\Robust\\repo')}
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath 'com.meituan.robust:gradle-plugin:0.4.90'
+        classpath 'com.zcx.plugin:gradle-plugin:1.0.0'
+//        classpath 'com.meituan.robust:gradle-plugin:0.4.90'
         classpath 'com.meituan.robust:auto-patch-plugin:0.4.90'
         classpath 'me.tatarka:gradle-retrolambda:3.2.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'

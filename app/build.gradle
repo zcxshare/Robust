@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
+apply plugin: 'auto-patch-plugin'
 apply plugin: 'me.tatarka.retrolambda'
-//apply plugin: 'auto-patch-plugin'
-apply plugin: 'robust'
+//apply plugin: 'robust'
+apply plugin: robust.gradle.plugin.AutoPatchTransform
 
 android {
     compileSdkVersion 23

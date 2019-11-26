@@ -61,12 +61,12 @@ public abstract class InsertcodeStrategy {
 
         //这样子可以在需要埋点的剔除指定的类
         for (String exceptName : exceptPackageList) {
-            if (className.startsWith(exceptName)) {
+            if (className.startsWith(exceptName+".")) {
                 return false;
             }
         }
         for (String name : hotfixPackageList) {
-            if (className.startsWith(name)) {
+            if (className.startsWith(name+".")) {
                 return true;
             }
         }

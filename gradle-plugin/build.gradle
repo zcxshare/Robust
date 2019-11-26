@@ -14,3 +14,12 @@ dependencies {
 }
 
 apply from: '../gradle_mvn_push.gradle'
+group "com.zcx.plugin"
+version "1.0.0"
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+}

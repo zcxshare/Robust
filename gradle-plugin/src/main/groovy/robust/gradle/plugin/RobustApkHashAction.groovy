@@ -27,17 +27,18 @@ class RobustApkHashAction implements Action<Project> {
                 if (isGradlePlugin300orAbove(project)){
                     //protected FileCollection resourceFiles;
                     FileCollection resourceFiles
-                    if (isGradlePlugin320orAbove(project)) {
+                    if (isGradlePlugin350orAbove(project)){
+                        //gradle 3.5.0 适配
+//                        resourceFiles = packageTask.resourceFiles.getAsFileTree()
+                    }else if (isGradlePlugin320orAbove(project)) {
                         //gradle 4.6 适配
                         resourceFiles = packageTask.resourceFiles.get()
                     } else {
                         resourceFiles = packageTask.resourceFiles
                     }
-                    if (null == resourceFiles) {
-                        return
+                    if (null != resourceFiles) {
+                        partFiles.add(resourceFiles.getFiles())
                     }
-                    partFiles.add(resourceFiles.getFiles())
-
                     //protected FileCollection dexFolders;
                     FileCollection dexFolders = null
                     try {
@@ -74,7 +75,10 @@ class RobustApkHashAction implements Action<Project> {
                     //protected FileCollection assets;
                     FileCollection assets = null;
                     try {
-                        if (isGradlePlugin320orAbove(project)) {
+                        if (isGradlePlugin350orAbove(project)){
+                            //gradle 3.5.0 适配
+                            assets = packageTask.resourceFiles.getAsFileTree()
+                        }else if (isGradlePlugin320orAbove(project)) {
                             //gradle 4.6 适配
                             assets = packageTask.assets.get()
                         } else {
@@ -222,6 +226,11 @@ class RobustApkHashAction implements Action<Project> {
         //gradlePlugin3.2.0 -> gradle 4.6+
         //see https://developer.android.com/studio/releases/gradle-plugin
         return compare(project.getGradle().gradleVersion, "4.6") >= 0
+    }
+    static boolean isGradlePlugin350orAbove(Project project) {
+        //gradlePlugin3.5.0 -> gradle 5.4.0+
+        //see https://developer.android.com/studio/releases/gradle-plugin
+        return compare(project.getGradle().gradleVersion, "5.4.0") >= 0
     }
 
     /**
